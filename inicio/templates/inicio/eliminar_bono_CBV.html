@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Eliminar Bono - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Eliminar Bono {{bono.ticker}} de {{bono.descripcion}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<form action={% url 'inicio:eliminar_bono' bono.id%} method="post">
+    {% csrf_token %}
+<p>¿Está seguro/a de eliminar {{bono.ticker}} de {{bono.descripcion}}?</p>
+    <button>Confirmar</button>
+</form>
+{% endblock contenido %}

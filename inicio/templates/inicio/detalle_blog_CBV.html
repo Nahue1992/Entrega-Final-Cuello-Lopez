@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+IC -Blogs - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+IC - Blog {{blog.titulo}} de {{blog.autor}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<li>Título: {{blog.titulo}}</li>
+<li>Subtítulo: {{blog.subtitulo}}</li>
+<li>Autor: {{blog.autor}}</li>
+{% comment %} <li>Fecha de Publicación: {{Blog.fecha_publicacion}}</li>
+<li>{{Blog.imagen}}</li>
+<li>{{Blog.cuerpo}}</li> {% endcomment %}
+{% endblock contenido %}

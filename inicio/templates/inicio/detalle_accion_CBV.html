@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Acción - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Descripción - {{accion.ticker}} - {{accion.descripcion}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<li>Ticker:  {{accion.ticker}}</li>
+<li>Descripción:  {{accion.descripcion}}</li>
+<li>Empresa:  {{accion.empresa}}</li>
+{% endblock contenido %}

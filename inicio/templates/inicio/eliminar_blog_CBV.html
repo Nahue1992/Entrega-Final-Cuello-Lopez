@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Eliminar IC - Blog - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Eliminar IC - Blog {{blog.titulo}} de {{blog.autor}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<form action={% url 'inicio:eliminar_blog' blog.id%} method="post">
+    {% csrf_token %}
+<p>¿Está seguro/a de eliminar {{blog.titulo}} de {{blog.autor}}?</p>
+    <button>Confirmar</button>
+</form>
+{% endblock contenido %}

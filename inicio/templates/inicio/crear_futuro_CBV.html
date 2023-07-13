@@ -10,15 +10,11 @@ Crear Futuro
 
 {% block contenido %}
 
-<p>{{mensaje}}</p>
-
-<form action="" method='post'>
+<form action={% url 'inicio:crear_futuro_CBV' %} method="post">
     {% csrf_token %}
     <table>
-    {{formulario}}
+    {{form}}
     </table>
-
     <button>Crear</button>
-    <button><a href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 </form>
 {% endblock contenido %}

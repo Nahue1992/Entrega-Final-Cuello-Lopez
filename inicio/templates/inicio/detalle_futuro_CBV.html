@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Futuro - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Descripción - {{futuro.ticker}} - {{futuro.descripcion}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<li>Ticker:  {{futuro.ticker}}</li>
+<li>Descripción:  {{futuro.descripcion}}</li>
+<li>Fecha de Vencimiento:  {{futuro.empresa}}</li>
+{% endblock contenido %}

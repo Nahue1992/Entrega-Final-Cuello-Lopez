@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Bono - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Descripción - {{bono.ticker}} - {{bono.descripcion}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<li>Ticker:  {{bono.ticker}}</li>
+<li>Descripción:  {{bono.descripcion}}</li>
+<li>Cupón:  {{bono.cupon}}</li>
+<li>Emisor:  {{bono.emisor}}</li>
+<li>Fecha de Emisión:  {{bono.fecha_emision}}</li>
+<li>Fecha de Vencimiento:  {{bono.fecha_vencimiento}}</li>
+{% endblock contenido %}

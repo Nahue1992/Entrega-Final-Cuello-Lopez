@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-Crear Futuro - Entrega Final
+Modificar Futuro - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
-Crear Futuro
+Modificar Futuro
 {% endblock h1_header %}
 
 {% block contenido %}
@@ -18,7 +18,8 @@ Crear Futuro
     {{formulario}}
     </table>
 
-    <button>Crear</button>
+    <button>Modificar</button>
     <button><a href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 </form>
+
 {% endblock contenido %}

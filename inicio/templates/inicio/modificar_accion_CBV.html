@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-Crear Futuro - Entrega Final
+Modificar Acción - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
-Crear Futuro
+Modificar Acción {{accion.ticker}} de {{accion.descripcion}}
 {% endblock h1_header %}
 
 {% block contenido %}
 
-<p>{{mensaje}}</p>
-
-<form action="" method='post'>
+<form action={% url 'inicio:modificar_accion' accion.id%} method="post">
     {% csrf_token %}
     <table>
-    {{formulario}}
+    {{form}}
     </table>
-
-    <button>Crear</button>
-    <button><a href={% url 'inicio:listar_especies'%}>Atrás</a></button>
+    <button>Modificar</button>
 </form>
 {% endblock contenido %}

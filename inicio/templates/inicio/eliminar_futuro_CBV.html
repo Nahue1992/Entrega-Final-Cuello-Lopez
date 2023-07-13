@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Eliminar Futuro - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Eliminar Futuro {{futuro.ticker}} - {{futuro.descripcion}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<form action={% url 'inicio:eliminar_futuro' futuro.id%} method="post">
+    {% csrf_token %}
+<p>¿Está seguro/a de eliminar {{futuro.ticker}} - {{futuro.descripcion}}?</p>
+    <button>Confirmar</button>
+</form>
+{% endblock contenido %}

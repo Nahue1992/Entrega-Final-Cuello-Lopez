@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-Crear Futuro - Entrega Final
+Crear IC - Blog - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
-Crear Futuro
+Crear IC - Blog
 {% endblock h1_header %}
 
 {% block contenido %}
 
-<p>{{mensaje}}</p>
-
-<form action="" method='post'>
+<form action={% url 'inicio:crear_blog' %} method="post">
     {% csrf_token %}
     <table>
     {{formulario}}
     </table>
-
     <button>Crear</button>
-    <button><a href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 </form>
 {% endblock contenido %}

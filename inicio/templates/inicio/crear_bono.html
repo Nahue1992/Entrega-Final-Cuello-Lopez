@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-Crear Bono - Preentrega3
+Crear Bono - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
@@ -19,5 +19,6 @@ Crear Bono
     </table>
 
     <button>Crear</button>
+    <button><a href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 </form>
 {% endblock contenido %}
