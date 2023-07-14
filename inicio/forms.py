@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import MaxValueValidator, MinValueValidator, MaxLengthValidator, MinLengthValidator
-from .models import Blog, Bono, Futuro, Accion
+from inicio.models import Blog, Bono, Futuro, Accion
 
 class BonoFormularioBase(forms.Form):
     ticker = forms.CharField(max_length=5, validators=[MaxLengthValidator(5), MinLengthValidator(5)])

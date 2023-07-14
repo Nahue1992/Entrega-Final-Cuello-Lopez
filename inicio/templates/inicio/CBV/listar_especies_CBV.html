@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Especies - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+Listado de Especies
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<table>
+    <button><a class="navbar-brand" href={% url 'inicio:crear_bono_CBV' %}>Crear Bono</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:crear_accion_CBV' %}>Crear Acción</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:crear_futuro_CBV' %}>Crear Futuro</a></button>
+</table>
+
+<p>Buscar Especie</p>
+
+<form action="" method="get">
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+
+{% for especie in especies %}
+    {% if especie|model_name == 'Bono' %}
+    <li>{{especie}}
+        <button><a class="navbar-brand" href={% url 'inicio:detalle_bono' bono.id %}>Ver más..</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:modificar_bono' bono.id %}>Modificar</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:eliminar_bono' bono.id %}>Eliminar</a></button>
+    </li>
+
+    {% elif especie|model_name == 'Accion' %}
+    <li>{{especie}}
+        <button><a class="navbar-brand" href={% url 'inicio:detalle_accion' accion.id %}>Ver más..</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:modificar_accion' accion.id %}>Modificar</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:eliminar_accion' accion.id %}>Eliminar</a></button>
+    </li>
+
+    {% elif especie|model_name == 'Futuro' %}
+    <li>{{especie}}
+        <button><a class="navbar-brand" href={% url 'inicio:detalle_futuro' futuro.id %}>Ver más..</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:modificar_futuro' futuro.id %}>Modificar</a></button>
+        <button><a class="navbar-brand" href={% url 'inicio:eliminar_futuro' futuro.id %}>Eliminar</a></button>
+    </li>
+
+    {% endif %}
+
+{% endfor %}
+
+{% for accion in Acciones %}
+<li>{{accion}}
+    <button><a class="navbar-brand" href={% url 'inicio:detalle_accion' accion.id %}>Ver más..</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:modificar_accion' accion.id %}>Modificar</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:eliminar_accion' accion.id %}>Eliminar</a></button>
+</li>
+{% endfor %}
+
+{% for bono in Bonos %}
+<li>{{bono}}
+    <button><a class="navbar-brand" href={% url 'inicio:detalle_bono' bono.id %}>Ver más..</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:modificar_bono' bono.id %}>Modificar</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:eliminar_bono' bono.id %}>Eliminar</a></button>
+</li>
+{% endfor %}
+
+{% for futuro in Futuros %}
+<li>{{futuro}}
+    <button><a class="navbar-brand" href={% url 'inicio:detalle_futuro' futuro.id %}>Ver más..</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:modificar_futuro' futuro.id %}>Modificar</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:eliminar_futuro' futuro.id %}>Eliminar</a></button>
+</li>
+{% endfor %}
+
+{% endblock contenido %}
+
+

@@ -16,4 +16,5 @@ IC - Blog {{blog.titulo}} de {{blog.autor}}
 {% comment %} <li>Fecha de Publicación: {{Blog.fecha_publicacion}}</li>
 <li>{{Blog.imagen}}</li>
 <li>{{Blog.cuerpo}}</li> {% endcomment %}
+<button><a class="navbar-brand" href={% url 'inicio:listar_blogs_CBV'%}>Atrás</a></button>
 {% endblock contenido %}

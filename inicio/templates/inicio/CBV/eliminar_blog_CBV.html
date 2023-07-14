@@ -14,5 +14,6 @@ Eliminar IC - Blog {{blog.titulo}} de {{blog.autor}}
     {% csrf_token %}
 <p>¿Está seguro/a de eliminar {{blog.titulo}} de {{blog.autor}}?</p>
     <button>Confirmar</button>
+    <button><a class="navbar-brand" href={% url 'inicio:listar_blogs_CBV'%}>Atrás</a></button>
 </form>
 {% endblock contenido %}

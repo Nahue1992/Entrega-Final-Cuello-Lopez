@@ -12,5 +12,6 @@ Descripción - {{futuro.ticker}} - {{futuro.descripcion}}
 
 <li>Ticker:  {{futuro.ticker}}</li>
 <li>Descripción:  {{futuro.descripcion}}</li>
-<li>Fecha de Vencimiento:  {{futuro.empresa}}</li>
+<li>Fecha de Vencimiento:  {{futuro.fecha_vencimiento}}</li>
+<button><a class="navbar-brand" href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 {% endblock contenido %}

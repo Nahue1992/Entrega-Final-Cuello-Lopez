@@ -24,26 +24,37 @@ def listar_especies(request):
     return render(request, 'inicio/listar_especies.html', {'formulario': formulario, 'Bonos': listado_de_bonos,
                                                            'Acciones': listado_de_acciones,'Futuros': listado_de_futuros})
 
-def listar_blogs(request):
+# def listar_blogs(request):
 
-    formulario = BuscarBlogFormulario(request.GET)
-    lista_blogs = Blog.objects.all()
+#     formulario = BuscarBlogFormulario(request.GET)
+#     lista_blogs = Blog.objects.all()
 
-    if formulario.is_valid():
-        titulo_a_buscar = formulario.cleaned_data.get('titulo', '')
-        subtitulo_a_buscar = formulario.cleaned_data.get('subtitulo', '')
-        autor_a_buscar = formulario.cleaned_data.get('autor', '')
+#     if formulario.is_valid():
+#         titulo_a_buscar = formulario.cleaned_data.get('titulo', '')
+#         subtitulo_a_buscar = formulario.cleaned_data.get('subtitulo', '')
+#         autor_a_buscar = formulario.cleaned_data.get('autor', '')
 
-        if titulo_a_buscar:
-            lista_blogs = Blog.objects.filter(titulo__icontains=titulo_a_buscar)
-        if subtitulo_a_buscar:
-            lista_blogs = Blog.objects.filter(subtitulo__icontains=subtitulo_a_buscar)
-        if autor_a_buscar:
-            lista_blogs = Blog.objects.filter(autor__icontains=autor_a_buscar)
+#         if titulo_a_buscar:
+#             lista_blogs = Blog.objects.filter(titulo__icontains=titulo_a_buscar)
+#         if subtitulo_a_buscar:
+#             lista_blogs = Blog.objects.filter(subtitulo__icontains=subtitulo_a_buscar)
+#         if autor_a_buscar:
+#             lista_blogs = Blog.objects.filter(autor__icontains=autor_a_buscar)
 
-    formulario = BuscarBlogFormulario()
-    return render(request, 'inicio/blogs.html', {'formulario': formulario, 'lista_blogs': lista_blogs})
+#     formulario = BuscarBlogFormulario()
+#     return render(request, 'inicio/blogs.html', {'formulario': formulario, 'lista_blogs': lista_blogs})
 
+# class ListarEspecies(ListView):
+#     queryset = Bono.objects.all()
+#     queryset = queryset.union(Accion.objects.all())
+#     queryset = queryset.union(Futuro.objects.all())
+#     template_name = "inicio/CBV/listar_especies_CBV.html"
+#     context_object_name = 'especies'
+
+class ListarBlogs(ListView):
+    model = Blog
+    template_name = "inicio/CBV/listar_blog_CBV.html"
+    context_object_name = 'blogs'
 
 class CrearBlog(CreateView):
     model = Blog

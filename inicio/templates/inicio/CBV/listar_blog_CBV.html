@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+IC Blogs - Entrega Final
+{% endblock title_header %}
+
+{% block h1_header %}
+IC Blogs
+{% endblock h1_header %}
+
+{% block contenido %}
+<button>
+    <a class="navbar-brand" href={% url 'inicio:crear_blog_CBV' %}>Crear Nuevo IC Blog</a>
+</button>
+
+
+<form action={% url 'inicio:listar_blogs_CBV' %}>
+    <table>
+    {{formulario}}
+    </table>
+    <button>Buscar</button>
+
+</form>
+
+{% if blogs %}
+{% for blog in blogs %}
+<li>{{blog}}
+    <button><a class="navbar-brand" href={% url 'inicio:detalle_blog' blog.id %}>Ver más..</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:modificar_blog' blog.id %}>Modificar</a></button>
+    <button><a class="navbar-brand" href={% url 'inicio:eliminar_blog' blog.id %}>Eliminar</a></button>
+</li>
+{% endfor %}
+{% else %}
+<p>No se encontraron Blogs</p>
+{% endif %}
+
+{% endblock contenido %}

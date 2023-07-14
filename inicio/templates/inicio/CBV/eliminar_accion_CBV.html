@@ -14,5 +14,6 @@ Eliminar Bono {{accion.ticker}} de {{accion.descripcion}}
     {% csrf_token %}
 <p>¿Está seguro/a de eliminar {{accion.ticker}} de {{accion.descripcion}}?</p>
     <button>Confirmar</button>
+    <button><a class="navbar-brand" href={% url 'inicio:listar_especies'%}>Atrás</a></button>
 </form>
 {% endblock contenido %}

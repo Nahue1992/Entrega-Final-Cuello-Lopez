@@ -7,8 +7,10 @@ urlpatterns = [
     path('', views.inicio, name= 'inicio'),
 
     path('especies/', views.listar_especies, name= 'listar_especies'),
-    path('IC_Blogs/', views.listar_blogs, name= 'blogs'),
 
+    # path('especiesCBV/', views.ListarEspecies.as_view(), name= 'listar_especies_CBV'),
+
+    # path('IC_Blogs/', views.listar_blogs, name= 'blogs'),
     # path('IC_Blogs/crear/', views.crear_blog, name= 'crear_blog'),
     # path('bonos/crear/', views.crear_bono, name= 'crear_bono'),
     # path('acciones/crear/', views.crear_accion, name= 'crear_accion'),
@@ -26,6 +28,7 @@ urlpatterns = [
     path('IC_Blogs/<int:pk>/', views.DetalleBlog.as_view(), name= 'detalle_blog'),
     path('IC_Blogs/<int:pk>/modificar/', views.ModificarBlog.as_view(), name= 'modificar_blog'),
     path('IC_Blogs/<int:pk>/eliminar/', views.EliminarBlog.as_view(), name= 'eliminar_blog'),
+    path('IC_Blogs/', views.ListarBlogs.as_view(), name= 'listar_blogs_CBV'),
     path('bonos/crearCBV', views.CrearBono.as_view(), name= 'crear_bono_CBV'),
     path('bonos/<int:pk>/', views.DetalleBono.as_view(), name= 'detalle_bono'),
     path('bonos/<int:pk>/modificar/', views.ModificarBono.as_view(), name= 'modificar_bono'),
