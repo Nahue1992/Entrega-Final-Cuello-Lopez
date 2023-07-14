@@ -5,6 +5,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -23,6 +25,103 @@ def listar_especies(request):
     formulario = BuscarEspeciesFormulario()
     return render(request, 'inicio/listar_especies.html', {'formulario': formulario, 'Bonos': listado_de_bonos,
                                                            'Acciones': listado_de_acciones,'Futuros': listado_de_futuros})
+
+###################
+
+class ListarBlogs(LoginRequiredMixin, ListView):
+    model = Blog
+    template_name = "inicio/CBV/listar_blog_CBV.html"
+    context_object_name = 'blogs'
+
+class CrearBlog(LoginRequiredMixin, CreateView):
+    model = Blog
+    form_class = CrearBlogFormularioCBV
+    template_name = "inicio/CBV/crear_blog_CBV.html"
+    success_url = reverse_lazy('inicio:blogs')
+
+class CrearBono(LoginRequiredMixin, CreateView):
+    model = Bono
+    form_class = CrearBonoFormularioCBV
+    template_name = "inicio/CBV/crear_bono_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class CrearAccion(LoginRequiredMixin, CreateView):
+    model = Accion
+    form_class = CrearAccionFormularioCBV
+    template_name = "inicio/CBV/crear_accion_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class CrearFuturo(LoginRequiredMixin, CreateView):
+    model = Futuro
+    form_class = CrearFuturoFormularioCBV
+    template_name = "inicio/CBV/crear_futuro_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+###################
+
+class DetalleBono(DetailView):
+    model = Bono
+    template_name = "inicio/CBV/detalle_Bono_CBV.html"
+
+class DetalleAccion(DetailView):
+    model = Accion
+    template_name = "inicio/CBV/detalle_accion_CBV.html"
+
+class DetalleFuturo(DetailView):
+    model = Futuro
+    template_name = "inicio/CBV/detalle_futuro_CBV.html"
+
+class DetalleBlog(LoginRequiredMixin, DetailView):
+    model = Blog
+    template_name = "inicio/CBV/detalle_blog_CBV.html"
+
+###################
+
+class ModificarBono(LoginRequiredMixin, UpdateView):
+    model = Bono
+    fields = ['ticker', 'descripcion', 'cupon', 'emisor', 'fecha_emision', 'fecha_vencimiento']
+    template_name = "inicio/CBV/modificar_Bono_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class ModificarAccion(LoginRequiredMixin, UpdateView):
+    model = Accion
+    fields = ['ticker', 'descripcion', 'empresa']
+    template_name = "inicio/CBV/modificar_accion_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class ModificarFuturo(LoginRequiredMixin, UpdateView):
+    model = Futuro
+    fields = ['ticker', 'descripcion', 'fecha_vencimiento']
+    template_name = "inicio/CBV/modificar_futuro_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class ModificarBlog(LoginRequiredMixin, UpdateView):
+    model = Blog
+    fields = ['titulo', 'subtitulo', 'autor']
+    template_name = "inicio/CBV/modificar_blog_CBV.html"
+    success_url = reverse_lazy('inicio:blogs')
+
+###################
+
+class EliminarAccion(LoginRequiredMixin, DeleteView):
+    model = Accion
+    template_name = "inicio/CBV/eliminar_accion_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class EliminarBono(LoginRequiredMixin, DeleteView):
+    model = Bono
+    template_name = "inicio/CBV/eliminar_Bono_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class EliminarFuturo(LoginRequiredMixin, DeleteView):
+    model = Futuro
+    template_name = "inicio/CBV/eliminar_futuro_CBV.html"
+    success_url = reverse_lazy('inicio:listar_especies')
+
+class EliminarBlog(LoginRequiredMixin, DeleteView):
+    model = Blog
+    template_name = "inicio/CBV/eliminar_blog_CBV.html"
+    success_url = reverse_lazy('inicio:blogs')
 
 # def listar_blogs(request):
 
@@ -50,97 +149,6 @@ def listar_especies(request):
 #     queryset = queryset.union(Futuro.objects.all())
 #     template_name = "inicio/CBV/listar_especies_CBV.html"
 #     context_object_name = 'especies'
-
-class ListarBlogs(ListView):
-    model = Blog
-    template_name = "inicio/CBV/listar_blog_CBV.html"
-    context_object_name = 'blogs'
-
-class CrearBlog(CreateView):
-    model = Blog
-    form_class = CrearBlogFormularioCBV
-    template_name = "inicio/CBV/crear_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
-
-class CrearBono(CreateView):
-    model = Bono
-    form_class = CrearBonoFormularioCBV
-    template_name = "inicio/CBV/crear_bono_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class CrearAccion(CreateView):
-    model = Accion
-    form_class = CrearAccionFormularioCBV
-    template_name = "inicio/CBV/crear_accion_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class CrearFuturo(CreateView):
-    model = Futuro
-    form_class = CrearFuturoFormularioCBV
-    template_name = "inicio/CBV/crear_futuro_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-###################
-
-class DetalleBono(DetailView):
-    model = Bono
-    template_name = "inicio/CBV/detalle_Bono_CBV.html"
-
-class DetalleAccion(DetailView):
-    model = Accion
-    template_name = "inicio/CBV/detalle_accion_CBV.html"
-
-class DetalleFuturo(DetailView):
-    model = Futuro
-    template_name = "inicio/CBV/detalle_futuro_CBV.html"
-
-class DetalleBlog(DetailView):
-    model = Blog
-    template_name = "inicio/CBV/detalle_blog_CBV.html"
-
-class ModificarBono(UpdateView):
-    model = Bono
-    fields = ['ticker', 'descripcion', 'cupon', 'emisor', 'fecha_emision', 'fecha_vencimiento']
-    template_name = "inicio/CBV/modificar_Bono_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class ModificarAccion(UpdateView):
-    model = Accion
-    fields = ['ticker', 'descripcion', 'empresa']
-    template_name = "inicio/CBV/modificar_accion_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class ModificarFuturo(UpdateView):
-    model = Futuro
-    fields = ['ticker', 'descripcion', 'fecha_vencimiento']
-    template_name = "inicio/CBV/modificar_futuro_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class ModificarBlog(UpdateView):
-    model = Blog
-    fields = ['titulo', 'subtitulo', 'autor']
-    template_name = "inicio/CBV/modificar_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
-
-class EliminarAccion(DeleteView):
-    model = Accion
-    template_name = "inicio/CBV/eliminar_accion_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class EliminarBono(DeleteView):
-    model = Bono
-    template_name = "inicio/CBV/eliminar_Bono_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class EliminarFuturo(DeleteView):
-    model = Futuro
-    template_name = "inicio/CBV/eliminar_futuro_CBV.html"
-    success_url = reverse_lazy('inicio:listar_especies')
-
-class EliminarBlog(DeleteView):
-    model = Blog
-    template_name = "inicio/CBV/eliminar_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
 
 # def crear_bono(request):
 #     mensaje = ''

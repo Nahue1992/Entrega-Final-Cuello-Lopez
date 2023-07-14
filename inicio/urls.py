@@ -5,10 +5,7 @@ app_name = 'inicio'
 
 urlpatterns = [
     path('', views.inicio, name= 'inicio'),
-
     path('especies/', views.listar_especies, name= 'listar_especies'),
-
-    # path('especiesCBV/', views.ListarEspecies.as_view(), name= 'listar_especies_CBV'),
 
     # path('IC_Blogs/', views.listar_blogs, name= 'blogs'),
     # path('IC_Blogs/crear/', views.crear_blog, name= 'crear_blog'),
@@ -23,6 +20,8 @@ urlpatterns = [
     # path('futuros/eliminar/<int:futuro_id>', views.eliminar_futuro, name= 'eliminar_futuro'),
 
     # CBV
+
+    # path('especiesCBV/', views.ListarEspecies.as_view(), name= 'listar_especies_CBV'),
 
     path('IC_Blogs/crearCBV', views.CrearBlog.as_view(), name= 'crear_blog_CBV'),
     path('IC_Blogs/<int:pk>/', views.DetalleBlog.as_view(), name= 'detalle_blog'),
