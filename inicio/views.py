@@ -13,6 +13,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
+def about(request):
+    return render(request, 'inicio/about.html')
+
+
+
 def listar_especies(request):
 
     formulario = BuscarEspeciesFormulario(request.GET)

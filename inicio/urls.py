@@ -5,6 +5,7 @@ app_name = 'inicio'
 
 urlpatterns = [
     path('', views.inicio, name= 'inicio'),
+    path('about/', views.about, name= 'about'),
     path('especies/', views.listar_especies, name= 'listar_especies'),
 
     # path('IC_Blogs/', views.listar_blogs, name= 'blogs'),
