@@ -1,8 +1,6 @@
 from django.db import models
-
-# Create your models here.
-
 from django.core.validators import MaxValueValidator, MinValueValidator, MaxLengthValidator, MinLengthValidator
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -34,14 +32,17 @@ class Futuro(models.Model):
     def __str__(self):
         return f'FUTURO - Ticker: {self.ticker} - Descripción {self.descripcion}'
 
-
 class Blog(models.Model):
     titulo = models.CharField(max_length=30)
     subtitulo = models.CharField(max_length=40)
-    # cuerpo = models.CharField()
     autor = models.CharField(max_length=20)
-    # fecha_publicacion = models.DateField()
-    # imagen = models.CharField()
+    fecha_publicacion = models.DateField()
+    cuerpo = RichTextField(null=True)
+    imagen = models.ImageField(upload_to='imagenes/', null=True, blank=True)
 
     def __str__(self):
-        return f'Titulo: {self.titulo} -Autor: {self.autor}'
+        return f'Titulo: {self.titulo} - Autor: {self.autor}'
+
+# class ImagenBlog(models.Model):
+#     blog = models.OneToOneField(Blog, on_delete=models.CASCADE)
+#     imagen = models.ImageField(upload_to='imagenes', null=True, blank=True)

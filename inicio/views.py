@@ -1,5 +1,6 @@
+from typing import Any, Dict
 from django.shortcuts import render, redirect
-from inicio.forms import CrearBlogFormulario, CrearAccionFormulario, CrearBonoFormulario, CrearFuturoFormulario, ModificarAccionFormulario, ModificarBonoFormulario, ModificarFuturoFormulario, BuscarEspeciesFormulario, CrearBlogFormularioCBV, BuscarBlogFormulario, CrearBlogFormularioCBV, CrearBonoFormularioCBV, CrearAccionFormularioCBV, CrearFuturoFormularioCBV
+from inicio.forms import CrearAccionFormulario, CrearBonoFormulario, CrearFuturoFormulario, ModificarAccionFormulario, ModificarBonoFormulario, ModificarFuturoFormulario, BuscarEspeciesFormulario, CrearBlogFormulario, CrearBlogFormularioCBV, BuscarBlogFormulario, CrearBlogFormularioCBV, CrearBonoFormularioCBV, CrearAccionFormularioCBV, CrearFuturoFormularioCBV, ModificarBlogFormulario
 from inicio.models import Bono, Accion, Futuro, Blog
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -38,11 +39,67 @@ class ListarBlogs(LoginRequiredMixin, ListView):
     template_name = "inicio/CBV/listar_blog_CBV.html"
     context_object_name = 'blogs'
 
+    def get_queryset(self):
+        formulario = BuscarBlogFormulario(self.request.GET)
+        lista_blogs = []
+        if formulario.is_valid():
+            titulo_a_buscar = formulario.cleaned_data.get('titulo', '')
+            subtitulo_a_buscar = formulario.cleaned_data.get('subtitulo', '')
+            autor_a_buscar = formulario.cleaned_data.get('autor', '')
+
+            if titulo_a_buscar:
+                lista_blogs = Blog.objects.filter(titulo__icontains=titulo_a_buscar)
+            if subtitulo_a_buscar:
+                lista_blogs = Blog.objects.filter(subtitulo__icontains=subtitulo_a_buscar)
+            if autor_a_buscar:
+                lista_blogs = Blog.objects.filter(autor__icontains=autor_a_buscar)
+
+            formulario = BuscarBlogFormulario()
+            return lista_blogs
+
+    def get_context_data(self, **kwargs):
+        contexto = super().get_context_data(**kwargs)
+        contexto['formulario'] = BuscarBlogFormulario()
+        return contexto
+
+##################
+
 class CrearBlog(LoginRequiredMixin, CreateView):
     model = Blog
     form_class = CrearBlogFormularioCBV
     template_name = "inicio/CBV/crear_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
+    success_url = reverse_lazy('inicio:listar_blogs_CBV')
+
+
+##################
+def crear_blog(request):
+    imagenblog = request.blog.imagenblog
+    mensaje = ''
+    if request.method == 'POST':
+        formulario = CrearBlogFormulario(request.POST, instance=request.blog)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            blog = blog(titulo=info['titulo'], subtitulo=info['subtitulo'],
+                        autor=info['autor'], fecha_publicacion=info['fecha_publicacion'],
+                        cuerpo=info['cuerpo'])
+            blog.save()
+            imagen_blog = formulario.cleaned_data.get('imagen')
+            imagenblog.blog = imagen_blog
+            imagenblog.save()
+            formulario.save()
+            return redirect('inicio:listar_blogs_CBV')
+        else:
+            return render(request, 'inicio/crear_blog.html', {'formulario': formulario})
+
+    formulario = CrearBlogFormulario()
+    return render(request, 'inicio/crear_blog.html', {'formulario': formulario, 'mensaje': mensaje})
+
+
+##################
+
+
+
+
 
 class CrearBono(LoginRequiredMixin, CreateView):
     model = Bono
@@ -102,9 +159,9 @@ class ModificarFuturo(LoginRequiredMixin, UpdateView):
 
 class ModificarBlog(LoginRequiredMixin, UpdateView):
     model = Blog
-    fields = ['titulo', 'subtitulo', 'autor']
+    form_class = ModificarBlogFormulario
     template_name = "inicio/CBV/modificar_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
+    success_url = reverse_lazy('inicio:listar_blogs_CBV')
 
 ###################
 
@@ -126,7 +183,7 @@ class EliminarFuturo(LoginRequiredMixin, DeleteView):
 class EliminarBlog(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = "inicio/CBV/eliminar_blog_CBV.html"
-    success_url = reverse_lazy('inicio:blogs')
+    success_url = reverse_lazy('inicio:listar_blogs_CBV')
 
 # def listar_blogs(request):
 
@@ -205,23 +262,6 @@ class EliminarBlog(LoginRequiredMixin, DeleteView):
 #     formulario = CrearFuturoFormulario()
 #     return render(request, 'inicio/crear_futuro.html', {'formulario': formulario, 'mensaje': mensaje})
 
-# def crear_blog(request):
-#     mensaje = ''
-#     if request.method == 'POST':
-#         formulario = CrearBlogFormulario(request.POST)
-#         if formulario.is_valid():
-#             info = formulario.cleaned_data
-#             blog = Blog(titulo=info['titulo'], subtitulo=info['subtitulo'], autor=info['autor'],
-#                         # emisor=info['emisor'], fecha_emision=info['fecha_emision'],
-#                         # fecha_vencimiento=info['fecha_vencimiento']
-#                         )
-#             blog.save()
-#             return redirect('inicio:blogs')
-#         else:
-#             return render(request, 'inicio/crear_blog.html', {'formulario': formulario})
-
-#     formulario = CrearBlogFormulario()
-#     return render(request, 'inicio/crear_blog.html', {'formulario': formulario, 'mensaje': mensaje})
 
 
 # def eliminar_accion(request, accion_id):

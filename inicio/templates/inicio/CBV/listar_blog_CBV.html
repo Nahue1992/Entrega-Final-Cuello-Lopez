@@ -13,13 +13,11 @@ IC Blogs
     <a class="navbar-brand" href={% url 'inicio:crear_blog_CBV' %}>Crear Nuevo IC Blog</a>
 </button>
 
-
-<form action={% url 'inicio:listar_blogs_CBV' %}>
+<form action="" method="get">
     <table>
     {{formulario}}
     </table>
     <button>Buscar</button>
-
 </form>
 
 {% if blogs %}

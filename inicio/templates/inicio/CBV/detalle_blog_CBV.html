@@ -13,8 +13,11 @@ IC - Blog {{blog.titulo}} de {{blog.autor}}
 <li>Título: {{blog.titulo}}</li>
 <li>Subtítulo: {{blog.subtitulo}}</li>
 <li>Autor: {{blog.autor}}</li>
-{% comment %} <li>Fecha de Publicación: {{Blog.fecha_publicacion}}</li>
-<li>{{Blog.imagen}}</li>
-<li>{{Blog.cuerpo}}</li> {% endcomment %}
+<li>Fecha de Publicación: {{blog.fecha_publicacion}}</li>
+<li>Desarrollo: {{blog.cuerpo | safe}}</li>
+{% if blog.imagen %}
+<img src="{{blog.imagen.url }}" alt="Imagen del blog">
+{% endif %}
+
 <button><a class="navbar-brand" href={% url 'inicio:listar_blogs_CBV'%}>Atrás</a></button>
 {% endblock contenido %}

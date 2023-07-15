@@ -10,10 +10,11 @@ Modificar IC - Blog {{blog.titulo}} de {{blog.autor}}
 
 {% block contenido %}
 
-<form action={% url 'inicio:modificar_blog' blog.id%} method="post">
+<form action={% url 'inicio:modificar_blog' blog.id%} method="post" enctype='multipart/form-data'>
     {% csrf_token %}
     <table>
     {{form}}
+    {{form.media}}
     </table>
     <button>Modificar</button>
     <button><a class="navbar-brand" href={% url 'inicio:listar_blogs_CBV'%}>Atrás</a></button>
