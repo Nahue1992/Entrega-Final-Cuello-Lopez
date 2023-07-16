@@ -1,5 +1,10 @@
 # Entrega-Final-Cuello-Lopez
 
+### 0. Video de Prueba
+
+Link = https://www.youtube.com/watch?v=bO9AC1D_dFw
+
+
 ### 1. Pruebas
 
 La preentrega consta de 3 modelos sobre especies del mercado de capitales
