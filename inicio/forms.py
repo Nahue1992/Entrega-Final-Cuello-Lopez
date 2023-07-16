@@ -59,8 +59,8 @@ class CrearBlogFormulario(forms.Form):
 class CrearBlogFormularioCBV(forms.ModelForm):
     class Meta:
         model = Blog
-        fields = ['titulo', 'subtitulo', 'autor',
-                  'cuerpo', 'fecha_publicacion', 'imagen']
+        fields = ['titulo', 'subtitulo', 'autor','fecha_publicacion',
+                  'cuerpo', 'imagen']
 
 
 class ModificarBlogFormulario(forms.ModelForm):
@@ -68,7 +68,6 @@ class ModificarBlogFormulario(forms.ModelForm):
         model = Blog
         fields = ['titulo', 'subtitulo', 'autor',
                   'cuerpo', 'imagen']
-
 
 
 class CrearBonoFormularioCBV(forms.ModelForm):

@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-Crear IC - Blog - Entrega Final
+Crear Blog - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
-Crear IC - Blog
+Crear Blog
 {% endblock h1_header %}
 
 {% block contenido %}
 
-<form action={% url 'inicio:crear_blog_CBV' %} method="post">
+<form action={% url 'inicio:crear_blog_CBV' %} method="post", enctype='multipart/form-data'>
     {% csrf_token %}
     <table>
     {{form}}

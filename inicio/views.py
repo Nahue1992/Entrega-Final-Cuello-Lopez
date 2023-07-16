@@ -70,36 +70,9 @@ class CrearBlog(LoginRequiredMixin, CreateView):
     template_name = "inicio/CBV/crear_blog_CBV.html"
     success_url = reverse_lazy('inicio:listar_blogs_CBV')
 
-
-##################
-def crear_blog(request):
-    imagenblog = request.blog.imagenblog
-    mensaje = ''
-    if request.method == 'POST':
-        formulario = CrearBlogFormulario(request.POST, instance=request.blog)
-        if formulario.is_valid():
-            info = formulario.cleaned_data
-            blog = blog(titulo=info['titulo'], subtitulo=info['subtitulo'],
-                        autor=info['autor'], fecha_publicacion=info['fecha_publicacion'],
-                        cuerpo=info['cuerpo'])
-            blog.save()
-            imagen_blog = formulario.cleaned_data.get('imagen')
-            imagenblog.blog = imagen_blog
-            imagenblog.save()
-            formulario.save()
-            return redirect('inicio:listar_blogs_CBV')
-        else:
-            return render(request, 'inicio/crear_blog.html', {'formulario': formulario})
-
-    formulario = CrearBlogFormulario()
-    return render(request, 'inicio/crear_blog.html', {'formulario': formulario, 'mensaje': mensaje})
-
-
-##################
-
-
-
-
+    def form_valid(self, form):
+        form.instance.imagen = self.request.FILES.get('imagen')
+        return super().form_valid(form)
 
 class CrearBono(LoginRequiredMixin, CreateView):
     model = Bono
@@ -184,6 +157,33 @@ class EliminarBlog(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = "inicio/CBV/eliminar_blog_CBV.html"
     success_url = reverse_lazy('inicio:listar_blogs_CBV')
+
+
+# ##################
+# def crear_blog(request):
+#     imagenblog = request.blog.imagenblog
+#     mensaje = ''
+#     if request.method == 'POST':
+#         formulario = CrearBlogFormulario(request.POST, instance=request.blog)
+#         if formulario.is_valid():
+#             info = formulario.cleaned_data
+#             blog = blog(titulo=info['titulo'], subtitulo=info['subtitulo'],
+#                         autor=info['autor'], fecha_publicacion=info['fecha_publicacion'],
+#                         cuerpo=info['cuerpo'])
+#             blog.save()
+#             imagen_blog = formulario.cleaned_data.get('imagen')
+#             imagenblog.blog = imagen_blog
+#             imagenblog.save()
+#             formulario.save()
+#             return redirect('inicio:listar_blogs_CBV')
+#         else:
+#             return render(request, 'inicio/crear_blog.html', {'formulario': formulario})
+
+#     formulario = CrearBlogFormulario()
+#     return render(request, 'inicio/crear_blog.html', {'formulario': formulario, 'mensaje': mensaje})
+
+
+##################
 
 # def listar_blogs(request):
 

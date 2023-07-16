@@ -9,7 +9,7 @@ urlpatterns = [
     path('especies/', views.listar_especies, name= 'listar_especies'),
 
     # path('IC_Blogs/', views.listar_blogs, name= 'blogs'),
-    path('IC_Blogs/crear/', views.crear_blog, name= 'crear_blog'),
+    # path('IC_Blogs/crear/', views.crear_blog, name= 'crear_blog'),
     # path('bonos/crear/', views.crear_bono, name= 'crear_bono'),
     # path('acciones/crear/', views.crear_accion, name= 'crear_accion'),
     # path('futuros/crear/', views.crear_futuro, name= 'crear_futuro'),

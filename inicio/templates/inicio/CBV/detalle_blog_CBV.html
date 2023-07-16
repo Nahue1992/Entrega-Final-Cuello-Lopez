@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title_header %}
-IC -Blogs - Entrega Final
+Blogs - Entrega Final
 {% endblock title_header %}
 
 {% block h1_header %}
-IC - Blog {{blog.titulo}} de {{blog.autor}}
+Blog {{blog.titulo}} de {{blog.autor}}
 {% endblock h1_header %}
 
 {% block contenido %}
@@ -16,7 +16,7 @@ IC - Blog {{blog.titulo}} de {{blog.autor}}
 <li>Fecha de Publicación: {{blog.fecha_publicacion}}</li>
 <li>Desarrollo: {{blog.cuerpo | safe}}</li>
 {% if blog.imagen %}
-<img src="{{blog.imagen.url }}" alt="Imagen del blog">
+<li><img src="{{blog.imagen.url }}" alt="Imagen del blog"></li>
 {% endif %}
 
 <button><a class="navbar-brand" href={% url 'inicio:listar_blogs_CBV'%}>Atrás</a></button>

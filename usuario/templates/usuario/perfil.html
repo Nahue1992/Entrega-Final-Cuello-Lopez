@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Perfil - {{user.username}}
+{% endblock title_header %}
+
+{% block h1_header %}
+Perfil - {{user.username}}
+{% endblock h1_header %}
+
+{% block contenido %}
+<li>Foto de Perfil:</li>
+
+{% if request.user.infoextra.avatar%}
+<img src={{request.user.infoextra.avatar.url}} alt="", height= '200px'>
+{% endif %}
+
+<li>Nombre:  {{nombre}}</li>
+<li>Apellido:  {{apellido}}</li>
+<li>E-mail:  {{email}}</li>
+<li>Descripción: {% if request.user.infoextra.descripcion%}{{request.user.infoextra.descripcion}}{% endif %}
+</li>
+<li>Pagina Web: {% if request.user.infoextra.pagina_web%}{{request.user.infoextra.pagina_web}}{% endif %}
+</li>
+
+
+<button><a class="navbar-brand" href={% url 'usuario:editar_perfil'%}>Editar Perfil</a></button>
+<button><a class="navbar-brand" href={% url 'inicio:inicio'%}>Atrás</a></button>
+
+{% endblock contenido %}
