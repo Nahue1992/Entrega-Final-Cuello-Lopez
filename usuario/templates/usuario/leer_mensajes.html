@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Mensajes
+{% endblock title_header %}
+
+{% block h1_header %}
+Mensajes
+{% endblock h1_header %}
+
+{% block contenido %}
+<h1>Mensajes de {{user.username}}</h1>
+<button><a class="navbar-brand" href={% url 'usuario:enviar_mensaje' %}>Crear Nuevo Mensaje</a></button>
+{% if mensajes %}
+    <ul>
+        {% for mensaje in mensajes %}
+            <li>
+                <strong>Emisor:</strong> {{ mensaje.emisor }}
+                <br>
+                <strong>Mensaje:</strong> {{ mensaje.mensaje }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se han encontrado mensajes.</p>
+{% endif %}
+{% endblock contenido %}

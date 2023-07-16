@@ -33,10 +33,11 @@
                 <img src={{request.user.infoextra.avatar.url}} alt="", height= '40px'>
                 {% endif %}
                 <a class="navbar-brand" href={% url 'usuario:perfil' %}>{{request.user.username}}</a>
-                <a class="btn btn-secondary" href={% url 'usuario:logout' %}>Logout</a>
+                <a class="navbar-brand" href={% url 'usuario:leer_mensajes' %}>Mensajes</a>
+                <a class="btn btn-secondary" href={% url 'usuario:logout' %}>Cerrar Sesión</a>
                 {% else %}
-                <a class="btn btn-primary" href={% url 'usuario:login' %}>Login</a>
-                <a class="btn btn-primary" href={% url 'usuario:signup' %}>Sign up</a>
+                <a class="btn btn-primary" href={% url 'usuario:login' %}>Iniciar Sesión</a>
+                <a class="btn btn-primary" href={% url 'usuario:signup' %}>Crear Cuenta</a>
                 {% endif %}
             </div>
         </nav>

@@ -4,17 +4,18 @@ from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from usuario.forms import FormularioCreacionUsuario, FormularioEditarDatos
-from usuario.models import InfoExtra
 from django.contrib.auth.models import User
+from django.views import View
 from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+from usuario.forms import FormularioCreacionUsuario, FormularioEditarDatos, FormularioMensaje
+from usuario.models import InfoExtra, Mensaje
 
 
 
 # Create your views here.
 
-def login(request):
+def iniciar_sesion(request):
 
     if request.method == 'POST':
         formulario = AuthenticationForm(request, data=request.POST)
@@ -36,7 +37,7 @@ def login(request):
     formulario = AuthenticationForm()
     return render(request, 'usuario/login.html', {'formulario': formulario})
 
-def signup(request):
+def registrarse(request):
 
     if request.method == ('POST'):
         formulario = FormularioCreacionUsuario(request.POST)
@@ -91,3 +92,23 @@ def perfil_usuario(request):
     }
 
     return render(request, 'usuario/perfil.html', contexto)
+
+
+class EnviarMensajeView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = FormularioMensaje()
+        return render(request, 'usuario/enviar_mensaje.html', {'form': form})
+
+    def post(self, request):
+        form = FormularioMensaje(request.POST)
+        if form.is_valid():
+            mensaje = form.save(commit=False)
+            mensaje.emisor = request.user
+            mensaje.save()
+            return redirect('usuario:leer_mensajes')
+        return render(request, 'usuario/enviar_mensaje.html', {'form': form})
+
+@ login_required
+def leer_mensajes(request):
+    mensajes = Mensaje.objects.filter(receptor=request.user)
+    return render(request, 'usuario/leer_mensajes.html', {'mensajes': mensajes})

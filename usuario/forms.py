@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextFormField
+from usuario.models import Mensaje
 
 class FormularioCreacionUsuario(UserCreationForm):
     email = forms.EmailField()
@@ -26,3 +27,18 @@ class FormularioEditarDatos(UserChangeForm):
     class Meta:
         model= User
         fields = ['email', 'first_name', 'last_name']
+
+
+class FormularioMensaje(forms.ModelForm):
+    receptor = forms.ModelChoiceField(queryset=User.objects.all(), empty_label=None)
+
+    class Meta:
+        model = Mensaje
+        fields = ['mensaje', 'receptor']
+        labels = {
+            'mensaje': 'Mensaje',
+            'receptor': 'Receptor',
+        }
+        widgets = {
+            'mensaje': forms.Textarea(attrs={'rows': 4}),
+        }

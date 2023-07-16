@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_header %}
+Enviar Mensaje
+{% endblock title_header %}
+
+{% block h1_header %}
+Enviar Mensaje
+{% endblock h1_header %}
+
+{% block contenido %}
+<h1>Enviar Mensaje</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Enviar</button>
+</form>
+{% endblock contenido %}

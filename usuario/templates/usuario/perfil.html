@@ -25,6 +25,7 @@ Perfil - {{user.username}}
 
 
 <button><a class="navbar-brand" href={% url 'usuario:editar_perfil'%}>Editar Perfil</a></button>
+<button type= 'buttton'><a  class="navbar-brand" href={% url 'usuario:cambiar_pass' %}>Cambiar Contraseña</a></button>
 <button><a class="navbar-brand" href={% url 'inicio:inicio'%}>Atrás</a></button>
 
 {% endblock contenido %}
